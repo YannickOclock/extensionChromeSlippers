@@ -1,0 +1,37 @@
+{
+    "name": "Slippers Messages Scrapping",
+    "description": "Cette extension permet de récupérer les messages en live dans Slippers",
+    "homepage_url": "https://oclock.slippers.live/",
+    "version": "2.0.0",
+    "manifest_version": 3,
+    "icons": {
+        "128": "icons/favicon.png"
+    },
+    "action": {
+      "default_title": "Le script content.js exécutera les instructions.",
+      "default_popup": "popup.html"
+    },
+    "content_scripts": [
+      {
+        "run_at" : "document_start",
+        "js": ["src/wait_for_elem.js", "src/get_messages.js", "content.js"],
+        "matches": [
+          "https://oclock.slippers.live/*",
+          "http://localhost/perso/chrome/slippers/"
+        ]
+      }
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "permissions": [
+      "tabs",
+      "scripting",
+      "activeTab",
+      "storage"
+    ],
+    "host_permissions": [
+      "https://oclock.slippers.live/*",
+      "http://localhost/perso/chrome/slippers/"
+    ]
+  }
